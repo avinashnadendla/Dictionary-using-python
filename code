@@ -1,0 +1,25 @@
+import json
+from difflib import get_close_matches
+x=json.load(open("Desktop\data.json"))
+a=input("Enter the word to search to find meaning for: ")
+new=""
+for i in a:
+    if(i.isupper()):
+        new=new+i.lower()
+    else:
+        new=new+i
+try:
+    for i in x[new]:
+        print(i)
+except:
+    if(len(get_close_matches(new,x.keys()))>0):
+        print("did you mean %s instead" %get_close_matches(new, x.keys())[0])
+        decide = input("press y for yes or n for no")
+        if decide == "y":
+            y=x[get_close_matches(new, x.keys())[0]]
+            for i in y:
+                print(i)
+        elif decide == "n":
+            print("wrong keys bro")
+        else:
+            print("go and learn english brother")
